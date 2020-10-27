@@ -59,13 +59,15 @@ namespace avt.Redirect
             List<RedirectInfoParam> redirectsParam = redirCtrl.GetRedirectsParam(ModuleId);
 
             ModuleController modCtrl = new ModuleController();
-            Hashtable modSettings = modCtrl.GetModuleSettings(ModuleId);
+            //Hashtable modSettings = modCtrl.GetModuleSettings(ModuleId);
+            var module = modCtrl.GetModule(ModuleId);
+            var modSettings = module.ModuleSettings;
 
             string redirUrl = null;
 
             bool bLogout;
             try {
-                bLogout = Convert.ToBoolean(modCtrl.GetModuleSettings(ModuleId)["LogoutUser"].ToString());
+                bLogout = Convert.ToBoolean(modSettings["LogoutUser"].ToString());
             } catch { bLogout = false; }
 
             // check parameters
